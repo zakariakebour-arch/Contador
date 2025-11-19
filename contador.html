@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: linear-gradient(320deg,white,black) no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #contenedor-padre{
+            box-shadow: 2px 2px 10px gainsboro;
+            border: 1px solid aqua;
+            min-width: 400px;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 10px;
+        }
+        button{
+            width: 50px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            background: linear-gradient(320deg,white,aqua);
+            box-shadow: 2px 2px 10px gainsboro;
+            animation: animacion 4s infinite ease;
+            width: 150px;
+            height: 40px;
+            text-align: center;
+        }
+        button:hover{
+            transform: scale(1.1);
+            box-shadow: 2px 2px 10px gray;
+            transition: 1s ease;
+        }
+        #contenedor-botones{
+            display: grid;
+            grid-template-columns: repeat(2,auto);
+            gap: 20px;
+        }
+        #contador{
+            width: 100px;
+            height: 200px;
+            text-align: center;
+            font-size: 50px;
+            color: white;
+            text-shadow: 2px 2px 10px white;
+        }
+        @keyframes animacion{
+            0%{
+                background: linear-gradient(320deg,white,aqua);
+            }
+            100%{
+                background: linear-gradient(320deg,aqua,white);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor-padre">
+       <div id="contador"></div>
+        <div id="contenedor-botones">
+            <button id="sumar">+</button>
+            <button id="restar">-</button>
+            <button id="x2">X2</button>
+            <button id="x10">10</button>
+        </div>
+    </div>
+    <script>
+        const contador = document.querySelector("#contador");
+        const sumar = document.querySelector("#sumar");
+        const restar = document.querySelector("#restar");
+        const X2 = document.querySelector("#x2");
+        const X10 = document.querySelector("#x10");
+
+        let numero = 0;
+
+        function actualizar(){
+            contador.textContent = numero;
+        }
+
+        function limite(){
+            if(numero > 100){
+                alert("Límite alcanzado");
+                numero = 100;
+            } else if(numero < 0){
+                alert("No se permiten valores negativos");
+                numero = 0;
+            }
+        }
+
+        actualizar();
+
+        sumar.addEventListener("click", () => {
+            numero++;
+            limite();
+            actualizar();
+        });
+
+        restar.addEventListener("click", () => {
+            numero--;
+            limite();
+            actualizar();
+        });
+
+        X2.addEventListener("click", () => {
+            numero += 2;
+            limite();
+            actualizar();
+        });
+
+        X10.addEventListener("click", () => {
+            numero += 10;
+            limite();
+            actualizar();
+        });
+    </script>
+</body>
+</html>
